@@ -269,7 +269,7 @@ Equipe: o desenvolvimento e a configuração da infraestrutura serão realizados
 
 
 
-## **12.0 -Benefícios Esperados**
+## **12.0 - Benefícios Esperados**
 - Com a implementação do Portal Cidadão Seguro, espera-se:
 
 Reduzir o risco de vazamento de dados dos cidadãos;
@@ -287,9 +287,44 @@ Criar uma arquitetura preparada para evolução futura.
 ---
 
 
+## **13.0 - Requisitos Não Funcionais - Portal Cidadão Seguro (GovTech)**
+
+Com base no documento de visão fornecido para o **Portal Cidadão Seguro**, os requisitos não funcionais (RNFs) foram estruturados e categorizados de acordo com os atributos de qualidade, segurança e restrições descritos no projeto:
+
+## 1. Segurança
+* **RNF01 - Isolamento de Rede:** A infraestrutura de nuvem deve ser implantada inteiramente dentro de uma Amazon VPC, segregando recursos em sub-redes públicas e privadas. Componentes que manipulam dados sensíveis e bancos de dados (como o Amazon RDS) devem residir exclusivamente em sub-redes privadas, sem acesso direto à internet pública.
+* **RNF02 - Controle de Tráfego por Camadas:** O tráfego de rede deve ser controlado em múltiplos níveis utilizando **Security Groups** (comportamento *stateful*) para restringir a comunicação entre os recursos e serviços da aplicação, e **Network Access Control Lists (NACLs)** (*stateless*) como camada adicional de inspeção e bloqueio nas sub-redes.
+* **RNF03 - Princípio do Menor Privilégio (IAM):** O acesso a todos los recursos da AWS deve ser gerenciado via IAM, aplicando obrigatoriamente o princípio do menor privilégio para usuários, serviços e aplicações, concedendo apenas as permissões estritamente necessárias para a execução de suas funções.
+* **RNF04 - Criptografia de Dados:** Todos os dados sensíveis dos cidadãos devem ser protegidos obrigatoriamente **em trânsito** (utilizando protocolos HTTPS/TLS) e **em repouso** (utilizando mecanismos de criptografia gerenciados pelo **AWS KMS**).
+
+## 2. Confiabilidade e Disponibilidade
+* **RNF05 - Alta Disponibilidade (Multi-AZ):** A arquitetura da aplicação e do banco de dados deve ser distribuída em múltiplas Zonas de Disponibilidade (Multi-AZ) na AWS, garantindo a continuidade dos serviços públicos digitais mesmo em caso de falha de um componente ou zona individual.
+* **RNF06 - Recuperação de Desastres (Disaster Recovery):** O sistema deve atender às metas de continuidade de negócio estabelecidas:
+  * **RPO (Recovery Point Objective):** Máximo de 15 minutos de perda tolerável de dados.
+  * **RTO (Recovery Time Objective):** Tempo máximo de recuperação e restabelecimento do sistema fixado em até 1 hora.
+
+## 3. Escalabilidade e Desempenho
+* **RNF07 - Escalabilidade Horizontal:** A infraestrutura deve suportar variações expressivas na volumetria de acessos simultâneos de milhões de cidadãos, utilizando recursos de dimensionamento automático (*Auto Scaling*) e balanceamento de carga para evitar pontos únicos de falha.
+* **RNF08 - Tempo de Resposta:** A plataforma deve manter tempos de resposta adequados e estáveis mesmo sob picos de alta demanda e tráfego elevado na rede.
+
+## 4. Auditabilidade e Monitoramento
+* **RNF09 - Centralização de Logs e Métricas:** Todas as métricas de infraestrutura, eventos e logs de aplicação devem ser centralizados e monitorados em tempo real por meio do **Amazon CloudWatch**, permitindo a detecção rápida de comportamentos anormais ou incidentes de segurança.
+* **RNF10 - Trilha de Auditoria:** O sistema deve registrar de forma imutável e centralizada todas as chamadas de API, acessos administrativos e operações relevantes na conta AWS utilizando o **AWS CloudTrail**, garantindo evidências completas para auditorias forenses e de segurança.
+
+## 5. Conformidade (Compliance)
+* **RNF11 - Aderência à LGPD:** A arquitetura, o tratamento, o armazenamento e o ciclo de vida dos dados pessoais tratados pela plataforma devem estar em total conformidade com as diretrizes e exigências da Lei Geral de Proteção de Dados (LGPD).
+
+## 6. Restrições Tecnológicas
+* **RNF12 - Provedor de Nuvem Obrigatório:** Toda a infraestrutura, processamento e armazenamento do Portal Cidadão Seguro devem ser hospedados e executados exclusivamente na plataforma de nuvem da **Amazon Web Services (AWS)**, utilizando os serviços especificados na arquitetura base (VPC, IAM, RDS, S3, EC2/ECS, CloudWatch, CloudTrail, KMS, NACLs e Security Groups).
 
 
-## **13.0 - Histórico de Versões**
+
+
+---
+
+
+
+## **14.0 - Histórico de Versões**
 
 - 02/09/2026
 1.0
