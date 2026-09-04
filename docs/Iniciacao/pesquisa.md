@@ -12,7 +12,7 @@ title: Documento de visão
 
 ---
 
-### **1.2 - Intrudução**
+### **1.2 - Introdução**
 
 - O propósito deste documento é definir a visão do produto Portal Cidadão Seguro, uma plataforma GovTech destinada ao atendimento e disponibilização de serviços públicos digitais para milhões de cidadãos.
 
