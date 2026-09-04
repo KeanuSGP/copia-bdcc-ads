@@ -1,9 +1,9 @@
-# Projeto Back-End 
+# Projeto Cloud
 
 **Código da Disciplina**: IBM8936<br>
 
-## Sobre 
-Descreva o seu projeto em linhas gerais. 
+## Alunos  
+Caio Domingues - Keanu Santos - Bernardo Meireles - Eric Lerer   
 
 ## Instalação 
 **Linguagens**: Python, Django<br>
